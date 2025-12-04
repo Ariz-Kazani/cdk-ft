@@ -1,17 +1,17 @@
 <script setup>
 import { ref } from 'vue';
 
+const emit = defineEmits(['square-clicked']);
+
 const ROWS = 8;
 const COLS = 8;
 
 const highLights = ref(Array.from({ length: ROWS }, () => Array(COLS).fill(false)));
 
 function toggleHighlight(row, col) {
-  console.log(`Toggling highlight for row ${row}, col ${col}`);
   highLights.value[row - 1][col - 1] = !highLights.value[row - 1][col - 1];
+  emit('square-clicked', { row: ROWS - row + 1, col: col });
 }
-
-
 
 </script>
 

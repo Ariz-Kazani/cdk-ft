@@ -1,16 +1,24 @@
 <script setup>
+import { ref } from 'vue';
+
 import ChessBoard from './components/ChessBoard.vue'
 import SideBar from './components/SideBar.vue'
+
+function handleSquareClicked(click) {
+  sideBarClickList.value.push(click);
+}
+
+const sideBarClickList = ref([]);
 
 </script>
 
 <template>
   <div id="app" class="app">
     <div class="chess-board-con">
-      <ChessBoard />
+      <ChessBoard @square-clicked="handleSquareClicked" />
     </div>
     <div class="sidebar-con">
-      <SideBar />
+      <SideBar :listItems="sideBarClickList" />
     </div>
   </div>
 </template>
@@ -26,6 +34,7 @@ import SideBar from './components/SideBar.vue'
 .chess-board-con {
   width: 100%;
   padding: 10%;
+  /* background-color: #000000; */
 }
 
 .sidebar-con {
@@ -37,7 +46,7 @@ import SideBar from './components/SideBar.vue'
   .app {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
   }
 
   .chess-board-con {
