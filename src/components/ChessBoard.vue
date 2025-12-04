@@ -1,6 +1,16 @@
 <script setup>
+import { ref } from 'vue';
+
 const ROWS = 8;
 const COLS = 8;
+
+const highLights = ref(Array.from({ length: ROWS }, () => Array(COLS).fill(false)));
+
+function toggleHighlight(row, col) {
+  console.log(`Toggling highlight for row ${row}, col ${col}`);
+  highLights.value[row - 1][col - 1] = !highLights.value[row - 1][col - 1];
+}
+
 
 
 </script>
@@ -9,8 +19,8 @@ const COLS = 8;
 <template>
   <div class="chess-board">
     <div v-for="row in ROWS" :key="row" class="row">
-      <div v-for="col in COLS" :key="col" :class="['square', (row + col) % 2 === 0 ? 'light' : 'dark']">
-        {{ square }}
+      <div v-for="col in COLS" :key="col"
+        :class="['square', (row + col) % 2 === 0 ? 'light' : 'dark', highLights[row - 1][col - 1] ? 'highlight' : '']" @click="toggleHighlight(row, col)">
       </div>
     </div>
   </div>
@@ -35,6 +45,7 @@ const COLS = 8;
   width: 100%;
   height: 100%;
   aspect-ratio: 1 / 1;
+  border: 4px solid transparent;
 }
 
 .light {
@@ -45,5 +56,9 @@ const COLS = 8;
 .dark {
   background-color: black;
   color: white;
+}
+
+.highlight {
+  border: 4px solid orange;
 }
 </style>

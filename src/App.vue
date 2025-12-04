@@ -30,18 +30,19 @@ import SideBar from './components/SideBar.vue'
 
 .sidebar-con {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 850px) {
   .app {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
   }
 
   .chess-board-con {
     padding: 12px;
   }
-  
+
 }
 </style>
